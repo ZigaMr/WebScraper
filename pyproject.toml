@@ -1,0 +1,20 @@
+[tool.poetry]
+name = "predictleads"
+version = "0.1.0"
+description = ""
+authors = ["Zigamr <ziga.mrzljak@gmail.com>"]
+
+[tool.poetry.dependencies]
+python = "^3.8"
+selenium = "^4.2.0"
+beautifulsoup4 = "^4.11.1"
+requests = "^2.27.1"
+webdriver-manager = "^3.7.0"
+pandas = "^1.4.2"
+pytest = "^7.1.2"
+
+[tool.poetry.dev-dependencies]
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
