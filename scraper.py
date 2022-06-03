@@ -25,6 +25,7 @@ def create_driver_and_scrape(driver: webdriver.Chrome,
     if 'Page not found' in driver.title:
         raise ValueError('Wrong URL, ', site_url)
     soup = BeautifulSoup(driver.page_source, features='html.parser')
+    driver.quit()
 
     # Many different ways to scrape the same results,
     # this combination of tag+class seems the most robust.
