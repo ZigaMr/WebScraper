@@ -1,10 +1,12 @@
 from bs4 import BeautifulSoup
 from selenium import webdriver
+from selenium.webdriver.common.desired_capabilities import DesiredCapabilities
 from selenium.webdriver.chrome.service import Service
 from webdriver_manager.chrome import ChromeDriverManager
 from selenium.webdriver.chrome.options import Options
 import pandas as pd
 import logging
+import time
 
 logging.basicConfig(filename='scraper.log', level=logging.INFO)
 
@@ -22,6 +24,7 @@ def create_driver_and_scrape(driver: webdriver.Chrome,
     # so no need to click "ALL"
     logging.info('Requesting site data')
     driver.get(site_url)
+    time.sleep(3)
     if 'Page not found' in driver.title:
         raise ValueError('Wrong URL, ', site_url)
     soup = BeautifulSoup(driver.page_source, features='html.parser')
@@ -53,6 +56,10 @@ options = Options()
 options.headless = True
 driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()),
                           options=options)
+# Uncomment to run in Docker
+# driver = webdriver.Remote("http://127.0.0.1:4444/wd/hub",
+#                            DesiredCapabilities.CHROME,
+#                            options=options)
 site_url = 'https://fin.capital/portfolio'
 
 if __name__ == '__main__':
